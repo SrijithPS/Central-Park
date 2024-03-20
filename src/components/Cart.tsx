@@ -1,35 +1,39 @@
-import { useState } from "react";
+import React from 'react'
+import { productList } from '../ProductList'
+import { Card, Col } from 'react-bootstrap'
 
-import { ProductProps } from "./Products";
-import { Products } from "./Products";
-import { Card } from "react-bootstrap";
-export function Cart() {
-  const [cart, setCart] = useState<ProductProps[]>([]);
-   function addToCart(product: ProductProps) {
-    setCart((prevCart) => [...prevCart, product]);
+const Cart = ({productId}:{productId:number}) => {
+  const addToCart=(productId:number)=>{
+    productList.map(product=>{
+      if(product.id===productId){
+        return (<>
+         <Col key={product.id} >
+            <div className="card-layout">
+              <Card style={{width: '250px',height: '520px'}}>
+                <Card.Img src={product.image} style={{objectFit:'cover'}} />
+                
+                <Card.Body  >
+                <Card.Title>{product.name}</Card.Title>
+                  <span>{product.rating.stars} </span>
+                  <span>{product.rating.count}</span>
+                  <Card.Text className="text-muted"> &#8377;{product.pricePaisa / 100} /-</Card.Text>
+                </Card.Body>
+
+               
+              </Card>
+            </div>
+          </Col>
+        </>)
+      }
+    })
+
   }
-
   return (
     <div>
-    <h2>My Cart</h2>
-    <ul>
-      {cart.map((item)=>(
-       <div className="card-layout">
-       <Card className="cards" key={item.id}>
-         <Card.Img src={item.image} />
-         <Card.Body>
-           <Card.Title>{item.name}</Card.Title>
-           <Card.Text> &#8377; {item.pricePaisa / 100}</Card.Text>
-           <p></p>
-          
-         </Card.Body>
-       </Card>
-     </div>
-      )
+      <h2>Your Cart</h2>
 
-      )}
-    </ul>
-    <Products  addToCart={addToCart}/>
     </div>
-  );
+  )
 }
+
+export default Cart

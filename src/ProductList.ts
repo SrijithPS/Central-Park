@@ -56,7 +56,7 @@ export const productList=[
   },
   {
     id:6,
-    name:"POCO C51 (Royal Blue, 6GB RAM, 128GB Storage)",
+    name:"POCO C51 (Royal Blue, 6GB RAM)",
     image:"src/assets/phone3.jpg" ,
     pricePaisa:63000,
     category:"phones",

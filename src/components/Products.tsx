@@ -1,8 +1,9 @@
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { productList } from "../ProductList";
-import { Cart } from "./Cart";
+import { useState } from "react";
+import Cart from "./Cart";
 
-export type ProductProps = {
+type item = {
   id: number;
   name: string;
   image: string;
@@ -12,26 +13,39 @@ export type ProductProps = {
     stars: number;
     count: number;
   };
-  addToCart:(product:ProductProps)=>void;
+};
+const Products = () => {
+  const[productId,setProductId]=useState<number[]>([]);
+  const addToCart=(productIdToAdd:number)=>{
+    setProductId(...productId,productIdToAdd)
+  }
+  return (
+    <>
+      <Row xs={1} md={2} lg={4} className="g-3" style={{marginTop:'0px'}}>
+        {productList.map((product) => (
+          <Col key={product.id} >
+            <div className="card-layout">
+              <Card style={{width: '250px',height: '520px'}}>
+                <Card.Img src={product.image} style={{objectFit:'cover'}} />
+                
+                <Card.Body  >
+                <Card.Title>{product.name}</Card.Title>
+                  <span>{product.rating.stars} </span>
+                  <span>{product.rating.count}</span>
+                  <Card.Text className="text-muted"> &#8377;{product.pricePaisa / 100} /-</Card.Text>
+                </Card.Body>
+
+                <Button variant="outline-secondary" onClick={()=>addToCart(product.id)} >Add Product
+                
+                </Button>
+              </Card>
+            </div>
+          </Col>
+        ))}
+      </Row>
+      <Cart productId={productId} />
+    </>
+  );
 };
 
-export function Products({addToCart}:{addToCart:(product:ProductProps)=>void}) {
-  const productListItems = productList.map((product) => (
-    <div className="card-layout">
-      <Card className="cards" key={product.id}>
-        <Card.Img src={product.image} />
-        <Card.Body>
-          <Card.Title>{product.name}</Card.Title>
-          <Card.Text> &#8377; {product.pricePaisa / 100}</Card.Text>
-          <p></p>
-          <Button variant="secondary" onClick={()=>addToCart(product)}>Add To Cart
-          </Button>
-        </Card.Body>
-      </Card>
-    </div>
-  ));
-
-  return <div>{productListItems}</div>;
-}
-
-
+export default Products;
