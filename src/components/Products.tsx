@@ -17,7 +17,7 @@ type item = {
 const Products = () => {
   const[productId,setProductId]=useState<number[]>([]);
   const addToCart=(productIdToAdd:number)=>{
-    setProductId(...productId,productIdToAdd)
+    setProductId(productId=>({...productId,productIdToAdd}))
   }
   return (
     <>
@@ -43,7 +43,7 @@ const Products = () => {
           </Col>
         ))}
       </Row>
-      <Cart productId={productId} />
+     
     </>
   );
 };
