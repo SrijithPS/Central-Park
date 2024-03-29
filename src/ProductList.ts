@@ -1,4 +1,4 @@
-export const productList=[
+export const PRODUCTLIST=[
   {
     id:1,
     name:"Armani Exchange Analog White Dial Men's Watch-AX4160' ",

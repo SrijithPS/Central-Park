@@ -1,38 +1,27 @@
-import React from 'react'
-import { productList } from '../ProductList'
-import { Card, Col } from 'react-bootstrap'
+import React, { useContext } from "react";
+import { PRODUCTLIST } from "../ProductList";
 
-const Cart = ({productId}:{productId:number}) => {
-  const selectedProduct=productList.find(product=>product.id===productId);
-  if(!selectedProduct){
-    return(
-      <div>
-        <h2>No product found</h2>
-      </div>
-    )
-  }
- 
+import { ProductContext } from "./Context";
+const Cart = () => {
+  const {cart}=useContext(ProductContext)
   return (
-    <div>
-      <h2>Your Cart</h2>
-      <Col key={selectedProduct.id} >
-          <div className="card-layout">
-            <Card style={{width: '250px',height: '520px'}}>
-              <Card.Img src={selectedProduct.image} style={{objectFit:'cover'}} />
-              
-              <Card.Body  >
-              <Card.Title>{selectedProduct.name}</Card.Title>
-                <span>{selectedProduct.rating.stars} </span>
-                <span>{selectedProduct.rating.count}</span>
-                <Card.Text className="text-muted"> &#8377;{selectedProduct.pricePaisa / 100} /-</Card.Text>
-              </Card.Body>
-
-             
-            </Card>
-          </div>
-        </Col>
+    <div className="cart">
+      <div>
+        <h2>Your Cart</h2>
+      </div>
+      <div className="cart-items">
+      {PRODUCTLIST.map(product=>{
+        if(cart[product.id] !==0){
+          return(
+            <div className="cart-item">
+<h3>{product.name}</h3>
+            </div>
+          )
+        }
+      })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

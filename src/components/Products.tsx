@@ -1,7 +1,8 @@
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { productList } from "../ProductList";
-import { useState } from "react";
-import Cart from "./Cart";
+import { Button, Card, Col, Row } from "react-bootstrap";
+import { PRODUCTLIST } from "../ProductList";
+import { useContext } from "react";
+import { ProductContext } from "./Context";
+
 
 type item = {
   id: number;
@@ -14,15 +15,13 @@ type item = {
     count: number;
   };
 };
+
 const Products = () => {
-  const[productId,setProductId]=useState<number[]>([]);
-  const addToCart=(productIdToAdd:number)=>{
-    setProductId(productId=>({...productId,productIdToAdd}))
-  }
+  const {addToCart,cart}=useContext(ProductContext)
   return (
     <>
       <Row xs={1} md={2} lg={4} className="g-3" style={{marginTop:'0px'}}>
-        {productList.map((product) => (
+        {PRODUCTLIST.map((product) => (
           <Col key={product.id} >
             <div className="card-layout">
               <Card style={{width: '250px',height: '520px'}}>
