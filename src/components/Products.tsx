@@ -1,9 +1,10 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { PRODUCTLIST } from "../PRODUCTLIST";
-import {  useState } from "react";
+import { useCart } from "./context/CartContext";
 
 
-type ItemProps = {
+
+export type ItemProps = {
   id: number;
   name: string;
   image: string;
@@ -17,10 +18,7 @@ type ItemProps = {
 
 const Products = () => {
 
-  const [productId,setProductId]=useState<ItemProps[]>([]);
- function handleProduct(){
-  
- }
+  const {addToCart}= useCart();
   return (
     <>
       <Row xs={1} md={2} lg={4} className="g-3" style={{ marginTop: "0px" }}>
@@ -42,7 +40,7 @@ const Products = () => {
 
                 <Button
                   variant="outline-secondary"
-                 onClick={handleProduct}
+                 onClick={()=>addToCart(product)}
                 >
                   Add Product
                 </Button>

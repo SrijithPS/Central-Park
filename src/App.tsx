@@ -5,11 +5,12 @@ import { Home } from "./components/Home";
 import { Header } from "./Header";
 import Products from "./components/Products";
 import Cart from "./components/Cart";
+import { CartContextProvider } from "./components/context/CartContext";
 
 
 function App() {
   return (
-    <>
+    <CartContextProvider>
       <Header />
       <Container className="mb-4">
       
@@ -21,7 +22,7 @@ function App() {
           </Routes>
      
       </Container>
-    </>
+    </CartContextProvider>
   );
 }
 export default App;
