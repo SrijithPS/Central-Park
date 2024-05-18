@@ -1,5 +1,5 @@
 import { Button, Card, Col, Row } from "react-bootstrap";
-import { PRODUCTLIST } from "../PRODUCTLIST";
+import { PRODUCTLIST } from "../ProductList";
 import { useCart } from "./context/CartContext";
 
 
